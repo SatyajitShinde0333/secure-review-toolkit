@@ -7,8 +7,57 @@ Once Bandit has finished scanning, it generates a report highlighting potential 
 
 Bandit was originally developed within the OpenStack Security Project and later rehomed to PyCQA.
 
-.. image:: https://raw.githubusercontent.com/pycqa/bandit/main/bandit-terminal.png
-    :alt: Bandit Example Screen Shot
+tool designed to find common security issues in Python code.  
+It processes each file, builds an **AST (Abstract Syntax Tree)**, and runs plugins against the AST nodes.  
+Once Bandit finishes scanning, it generates a report highlighting potential vulnerabilities.
+
+Bandit was originally developed within the OpenStack Security Project and later rehomed to PyCQA.
+
+![Bandit Example Screen Shot](https://raw.githubusercontent.com/pycqa/bandit/main/bandit-terminal.png)
+
+---
+
+## ✨ Features
+
+- Scans Python code for security issues
+- Provides a configurable set of rules and plugins
+- Supports multiple output formats (JSON, HTML, CSV, YAML, etc.)
+- Easy integration into CI/CD pipelines
+- Can be run locally or as a container image
+
+---
+
+## 🛠️ How It Was Created and How It Works
+
+Bandit was developed to automate secure code review in Python projects.
+
+### 🔹 1. AST Parsing
+- Bandit uses Python’s built-in `ast` module to parse `.py` files into Abstract Syntax Trees.
+- The AST represents your code as a tree of nodes (functions, imports, assignments, etc).
+
+### 🔹 2. Plugin Architecture
+- Each security check is implemented as a **plugin** (a Python function).
+- Plugins examine AST nodes for known issues (e.g., usage of `eval`, insecure hash functions).
+- You can write your own plugins.
+
+### 🔹 3. Processing Workflow
+- For each file:
+  - Build the AST.
+  - Run each plugin on relevant nodes.
+  - Collect findings into a report.
+- Findings are categorized by severity and confidence.
+
+### 🔹 4. Filtering and Reporting
+- After scanning, results are filtered according to:
+  - Severity level (low/medium/high)
+  - Confidence level (low/medium/high)
+- Output can be formatted in JSON, CSV, YAML, or plain text.
+
+### 🔹 5. Extensibility
+- Configuration files and command-line options control:
+  - Which rules are enabled
+  - Which files are excluded
+  - Output format
 
 Features
 --------
